@@ -21,3 +21,4 @@ npm start
 |-------------------|---------------------------------------|
 | VERIFY_TOKEN      | Random string to verify your webhook  |
 | PAGE_ACCESS_TOKEN | Genereated token for authorized page  |
+| MONGO_URI         | Your mongodb connection string        |
