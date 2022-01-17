@@ -11,6 +11,11 @@ npm install
 npm run dev
 ```
 
+## Running tests
+```
+MONGO_URI_TEST <YOUR-MONGO-URI-FOR-TESTING> npm test
+```
+
 ## Running in production mode
 ```
 npm start

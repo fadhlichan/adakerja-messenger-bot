@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/server",
     "dev": "nodemon ./src/server",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,11 @@
     "mongoose": "^6.1.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "superagent": "^7.0.2",
+    "supertest": "^6.2.1"
   }
 }
