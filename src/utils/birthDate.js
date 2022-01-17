@@ -1,21 +1,50 @@
+const TODAY = new Date()
+const CURRENT_DATE = TODAY.getDate()
+const CURRENT_MONTH = TODAY.getMonth()
+const CURRENT_YEAR = TODAY.getFullYear()
+
 exports.daysUntilNextBirthDay = birthDay => {
-    const DAY = 1 * 24 * 60 * 60 * 1000
-    const today = new Date()
-    const currentYear = today.getFullYear()
-    const currentMonth = today.getMonth() + 1
+    let birthDate = birthDay.getDate()
+    let birthMonth = birthDay.getMonth()
 
-    const birthDayMonth = birthDay.getMonth() + 1
-    const birthDayDate = birthDay.getDate()
+    let currentDay = getDays()
+    let targetDay = getDays(birthDate, birthMonth)
 
-    let nextBirthDayYear
-    if (birthDayMonth > currentMonth) {
-        nextBirthDayYear = currentYear
-    } else {
-        nextBirthDayYear = currentYear + 1
+    if (currentDay > targetDay) {
+        // date of birth has passed
+        const TOTAL_DAYS_IN_THE_YEAR = isLeapYear(CURRENT_YEAR) ? 366 : 365
+        let targetDayNextYear = getDays(birthDate, birthMonth, CURRENT_YEAR + 1)
+
+        return TOTAL_DAYS_IN_THE_YEAR - currentDay + targetDayNextYear
     }
 
-    const nextBirthDay = `${nextBirthDayYear}-${birthDayMonth}-${birthDayDate}`
-    return Math.round((new Date(nextBirthDay).getTime() - today.getTime()) / DAY) + (isLeapYear(currentYear) ? 1 : 0)
+    return targetDay - currentDay
 }
 
-const isLeapYear = year => year % 4 === 0
+const isLeapYear = year => {
+    // Pseudocode from https://id.wikipedia.org/wiki/Tahun_kabisat
+    if (year % 400 === 0) return true
+    else if (year % 100 === 0) return false
+    else if (year % 4 === 0) return true
+    else return false
+}
+
+const getDays = (date = CURRENT_DATE, month = CURRENT_MONTH, year = CURRENT_YEAR) => {
+    const MONTH_DAYS = [
+        31, // January
+        isLeapYear(year) ? 29 : 28, // February
+        31, // March
+        30, // April
+        31, // May
+        30, // June
+        31, // July
+        31, // August
+        30, // September
+        31, // October
+        30, // November
+        31  // December
+    ]
+
+    let days = MONTH_DAYS.slice(0, month).reduce((a, b) => a + b, date)
+    return days
+}
