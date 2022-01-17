@@ -12,7 +12,11 @@ exports.getMessages = catchAsync(async (req, res) => {
         data: {
             totalPage: Math.ceil(count / limit),
             currentPage: page,
-            messages: messages
+            messages: messages.map(msg => ({
+                id: msg._id,
+                senderPSID: msg.senderPSID,
+                text: msg.text
+            }))
         }
     })
 })
@@ -24,7 +28,11 @@ exports.getMessage = catchAsync(async (req, res) => {
     res.status(200).json({
         error: null,
         data: {
-            message: message
+            message: {
+                id: message._id,
+                senderPSID: message.senderPSID,
+                text: message.text
+            }
         }
     })
 })
