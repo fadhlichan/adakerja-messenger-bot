@@ -1,6 +1,6 @@
-require('../src/utils/dotenv')
+require('../../src/utils/dotenv')
 const request = require('supertest')
-const app = require('../src/app')
+const app = require('../../src/app')
 
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN
 

@@ -1,8 +1,8 @@
-require('../src/utils/dotenv')
+require('../../src/utils/dotenv')
 const request = require('supertest')
-const app = require('../src/app')
-const db = require('../src/db')
-const Message = require('../src/models/message')
+const app = require('../../src/app')
+const db = require('../../src/db')
+const Message = require('../../src/models/message')
 
 const MONGO_URI = process.env.MONGO_URI_TEST
 
