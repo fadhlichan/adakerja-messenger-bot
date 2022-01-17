@@ -3,12 +3,11 @@ const mongoose = require('mongoose')
 module.exports.connect = async (uri) => {
     await mongoose.connect(uri, {
         useNewUrlParser: true,
-        useUnifiedTopology: true,
-        poolSize: 10
+        useUnifiedTopology: true
     })
 }
 
-module.exports.close = () => {
+module.exports.close = async () => {
     await mongoose.connection.dropDatabase()
     await mongoose.connection.close()
 }
