@@ -98,8 +98,10 @@ describe('Testing messages API', () => {
 
         const response1 = await request(app).delete('/message/' + message1._id.toString())
         expect(response1.statusCode).toBe(204)
+        expect(await Message.findOne({ senderPSID: 1 })).toBeNull()
 
         const response2 = await request(app).delete('/message/' + message2._id.toString())
         expect(response2.statusCode).toBe(204)
+        expect(await Message.findOne({ senderPSID: 2 })).toBeNull()
     })
 })
